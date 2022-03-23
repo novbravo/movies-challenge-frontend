@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-12">
+        <h2>{{ id === 'new' ? 'New' : 'Edit' }} movie</h2>
+    </div>
+</div>
+<hr />
+<div *ngIf="loading" class="row text-center animated FadeIn">
+    <div class="col">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<form *ngIf="!loading" (ngSubmit)="confirm(f)" #f="ngForm">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" 
+             class="form-control"
+             name="title"             
+             [(ngModel)]="movie.title"
+             required >
+            
+    </div>
+    <div class="row">
+        <div class="col-4 mb-3">
+            <label for="release_date" class="form-label">Release date</label>
+            <input type="date" 
+                   class="form-control"
+                   name="release_date"             
+                   [(ngModel)]="movie.release_date">
+        </div>
+        <div class="col-4 mb-3">      
+            <label for="genre" class="form-label">Genre</label>
+            <input type="text"
+                    class="form-control"
+                    name="genre"             
+                   [(ngModel)]="movie.genre">
+        </div>
+        <div class="col-4 mb-3">      
+            <label for="status" class="form-label">Status</label>
+            <select class="form-select"
+                    name="status"
+                    [(ngModel)]="movie.status">
+                <option selected value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="plot" class="form-label">Plot</label>
+        <textarea name="text" rows="5" class="form-control"
+                  [(ngModel)]="movie.plot"></textarea>
+      </div>
+    <div style="text-align: right;">
+        <button type="button" class="btn btn-danger" style="margin-right: 15px;" (click)="back()">Cancel</button>
+        <button type="submit" class="btn btn-primary">Confirm</button>
+    </div>
+  </form>

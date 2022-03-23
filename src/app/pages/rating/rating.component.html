@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-6">
+    <h2>Rating movie</h2>
+  </div>
+  <div class="col-6" style="text-align: right;">
+    <button class="btn btn-outline-primary" 
+            type="button"
+            #modalButton
+            (click)="new()">New vote</button>
+</div>
+<hr />
+</div>
+<div *ngIf="loading" class="row text-center animated FadeIn">
+  <div class="col">
+    <i class="fas fa-spinner fa-spin fa-2x"></i>
+  </div>
+</div>
+<div *ngIf="!loading">
+  <div class="mb-3 row" style="font-size: 20px">
+    <div class="col-2">
+      <label for="title" class="col-form-label">Title:</label>
+    </div>
+    <div class="col-10">
+      <input
+        type="text"
+        readonly
+        class="form-control-plaintext"
+        id="title"
+        [value]="movie.title"
+      />
+    </div>
+  </div>
+  <div class="mb-3 row" style="font-size: 20px">
+    <div class="col-2">
+      <label for="title" class="col-form-label">Release date:</label>
+    </div>
+    <div class="col-10">
+      <input
+        type="text"
+        readonly
+        class="form-control-plaintext"
+        id="title"
+        [value]="movie.release_date | date: 'dd/MM/YYYY'"
+      />
+    </div>
+  </div>
+  <div style="text-align: center">
+    <star-rating
+      [value]="avg"
+      [totalstars]="5"
+      checkedcolor="red"
+      uncheckedcolor="grey"
+      size="40px"
+      [readonly]="false"
+    >
+    </star-rating>
+    <h3>Votes: {{ cant }}</h3>
+  </div>
+  <div *ngFor="let rating of ratings" class="card mt-2">
+    <div class="card-header">Comment</div>
+    <div class="card-body">
+      <blockquote class="blockquote mb-0">
+        <h4>{{ rating.comment }}</h4>
+        <footer class="blockquote-footer" style="text-align: right">
+          {{ rating.user.name }}
+          <cite title="Source Title"> - Vote: {{ rating.rating }}</cite>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</div>
+<div style="text-align: right" class="mt-3">
+  <button type="button" class="btn btn-danger" (click)="back()">Return</button>
+</div>
+
+
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" #testModal id="testModal">
+<div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New vote</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="mb-3">
+                <div style="text-align: center">
+                    <star-rating
+                      [value]="avg"
+                      [totalstars]="5"
+                      checkedcolor="red"
+                      uncheckedcolor="grey"
+                      size="40px"
+                      [readonly]="false"
+                      (rate)="onRate($event)"
+                    >
+                    </star-rating>
+                  </div>
+            </div>
+            <div class="mb-3">
+              <label for="comment" class="col-form-label">Comment:</label>
+              <textarea class="form-control" id="comment" name="comment" [(ngModel)]="comment"></textarea>
+            </div>
+          </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="save()">Save changes</button>
+    </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-6">
+        <h2>Movies</h2>
+    </div>    
+    <div class="col-6" style="text-align: right;">
+        <button class="btn btn-outline-primary" type="button" (click)="new()">New</button>
+    </div>
+</div>
+<hr />
+<div *ngIf="loading" class="row text-center animated FadeIn">
+    <div class="col">
+        <i class="fas fa-spinner fa-spin fa-2x"></i>
+    </div>
+</div>
+<table *ngIf="!loading" class="table table-striped bg-light">    
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Movie</th>
+            <th scope="col">Release date</th>
+            <th scope="col">Genre</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let movie of movies; let i = index" style="vertical-align: middle;">
+            <th>{{ i + 1 }}</th>
+            <td>{{ movie.title }}</td>
+            <td>{{ movie.release_date | date: 'dd/MM/YYYY' }}</td>
+            <td>{{ movie.genre }}</td>
+            <td>{{ movie.status == true ? 'Active' : 'Inactive' }}</td>
+            <td>
+                <button class="btn btn-outline-primary" style="margin-right: 5px;" type="button" (click)="edit(movie)"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-outline-danger" type="button" (click)="rating(movie)"><i class="fas fa-star"></i></button>
+            </td>
+        </tr>
+    </tbody>
+</table>
