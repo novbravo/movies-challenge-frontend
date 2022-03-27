@@ -70,7 +70,7 @@ export class MovieComponent implements OnInit {
   }
 
   back() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/movies']);
   }
 
   sweetAlertMessage(code: number) {

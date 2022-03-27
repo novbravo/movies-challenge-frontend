@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from 'src/app/models/movie.model';
 
 import { MoviesService } from 'src/app/services/movies.service';
+import { RatingsService } from '../../services/ratings.service';
 
 @Component({
   selector: 'app-home',
@@ -15,28 +16,33 @@ export class HomeComponent implements OnInit {
 
   constructor(private moviesSrv: MoviesService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private ratingsSrv: RatingsService) { }
 
   ngOnInit() {
     this.getMovies();
+    this.getRating();
   }
 
   getMovies() {
     this.loading = true;
     this.moviesSrv.getMovies().subscribe(resp => {
       this.movies = resp.movies;
-      console.log(this.movies);
       this.loading = false;
     })
   }
 
+  getRating() {
+    this.ratingsSrv.getRatings().subscribe((resp: any) => {
+      console.log(resp);
+    })
+  }
+
   edit(movie: Movie) {
-    console.log(movie);
     this.router.navigate(['/movie', movie._id]);
   }
 
   rating(movie: Movie) {
-    console.log(movie);
     this.router.navigate(['/rating', movie._id]);
   }
 

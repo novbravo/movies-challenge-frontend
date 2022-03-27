@@ -17,4 +17,8 @@ export class RatingsService {
   postRating(rating: any) {
     return this.http.post(environment.urlApi + '/ratings', rating);
   }
+
+  getRatings() {
+    return this.http.get(environment.urlApi + '/ratings');
+  }
 }

@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 body {
     background-color: #dad6d6;
+    font-family:'PTSans-Regular';
 }
 
 h1,h2,h3,h4,h5 {
     font-weight: 200;
     color: black;
+    font-family:'PTSans-Regular';
 }
 
 p {
@@ -34,3 +36,11 @@ hr{
 .block {
     display:block;
 }
+
+.txt1 {
+    font-family: PTSans-Regular;
+    font-size: 16px;
+    color: #827ffe;
+    line-height: 1.4;
+  }
+  
