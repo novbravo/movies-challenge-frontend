@@ -27,7 +27,6 @@ export class RatingsComponent implements OnInit {
   getRating() {
     this.ratingsSrv.getRatings().subscribe((resp: any) => {
       this.ratings = resp.ratingsAvg;
-      console.log(this.ratings);
     })
   }
 

@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
 
   getRating() {
     this.ratingsSrv.getRatings().subscribe((resp: any) => {
-      console.log(resp);
     })
   }
 

@@ -44,7 +44,6 @@ export class MovieComponent implements OnInit {
 
   confirm(form: NgForm) {
     if (form.invalid) {
-      console.log('invalid');
       return;
     }
     

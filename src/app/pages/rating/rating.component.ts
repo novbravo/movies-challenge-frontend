@@ -24,7 +24,8 @@ export class RatingComponent implements OnInit {
   testModal: Modal | undefined;
   newValueStar = 0;
   comment = '';
-
+  user: any;
+  
   constructor(private activatedRoute: ActivatedRoute,
               private ratingsSrv: RatingsService,
               private movieSrv: MoviesService,
@@ -48,7 +49,7 @@ export class RatingComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.user = JSON.parse(localStorage.getItem('user')!);
   }
 
   onRate($event:{oldValue:number, newValue:number, starRating:StarRatingComponent}) {
@@ -74,7 +75,7 @@ export class RatingComponent implements OnInit {
       rating: this.newValueStar,
       comment: this.comment,
       movie: this.movie._id,
-      user: '6237e51ea547d3f62faa81e3'
+      user: this.user._id
     };
     this.ratingsSrv.postRating(rat).subscribe((resp: any) => {
       if (resp.ratingObj._id) {

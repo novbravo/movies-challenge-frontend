@@ -23,12 +23,10 @@ export class MoviesService {
   }
 
   postMovie(movie: Movie) {
-    console.log(movie);
     return this.http.post<Movie>(environment.urlApi + '/movies', movie);
   }
 
   putMovie(movie: Movie) {
-    console.log(movie);
     return this.http.put<Movie>(environment.urlApi + '/movies/' + movie._id, movie);
   }
 

@@ -35,7 +35,6 @@ export class MoviesComponent implements OnInit {
 
   getRating() {
     this.ratingsSrv.getRatings().subscribe((resp: any) => {
-      console.log(resp);
     })
   }
 
