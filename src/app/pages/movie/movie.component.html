@@ -20,13 +20,13 @@
             
     </div>
     <div class="row">
-        <div class="col-4 mb-3">
+        <div class="col-4 mb-3">            
             <label for="release_date" class="form-label">Release date</label>
-            <input type="date" 
-                   class="form-control"
-                   name="release_date"             
-                   [(ngModel)]="movie.release_date">
-            
+            <div class="input-group">
+                <input class="form-control" placeholder="dd-mm-yyyy"
+                name="dp" [(ngModel)]="dateRelease" ngbDatepicker #d="ngbDatepicker">
+                <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="fas fa-calendar-alt"></i></button>
+            </div>
         </div>
         <div class="col-4 mb-3">      
             <label for="genre" class="form-label">Genre</label>

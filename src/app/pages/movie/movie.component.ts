@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgForm } from "@angular/forms";
 
+import { NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+
+
 import { MoviesService } from 'src/app/services/movies.service';
 import { Movie } from 'src/app/models/movie.model';
 
@@ -14,15 +17,19 @@ import Swal from 'sweetalert2';
 })
 export class MovieComponent implements OnInit {
   movie = new Movie();
-  dateRelease = new Date();
+ // dateRelease = new Date();
   id = '';
   loading = true;
+  dateRelease: NgbDateStruct | undefined;
+  date: any;
 
   constructor(private moviesSrv: MoviesService,
               private activatedRoute: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private calendar: NgbCalendar) { }
 
   async ngOnInit() {
+    //this.dateRelease.day = 1;
     this.id = this.activatedRoute.snapshot.params['id'];
     if (this.id === 'new') {
       this.loading = false;
@@ -37,6 +44,15 @@ export class MovieComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       return this.moviesSrv.getMovie(params['id']).toPromise().then((resp: any) => {
         this.movie = resp.movie;
+        const year = new Date(this.movie.release_date).getFullYear();
+        const month = new Date(this.movie.release_date).getMonth() + 1;
+        const day = new Date(this.movie.release_date).getDate();
+        this.dateRelease = {
+          year,
+          month,
+          day
+        };
+       
         this.loading = false;
       })
     });
@@ -46,7 +62,11 @@ export class MovieComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-    
+    if (this.dateRelease?.day !== undefined) {
+      const d = this.dateRelease.day + 1;
+    }
+    this.movie.release_date = (this.dateRelease?.year.toString() + '-' + this.dateRelease?.month.toString() + '-' + this.dateRelease?.day.toString());
+
     if (this.id === 'new') {
       this.moviesSrv.postMovie(this.movie).subscribe((resp: any) => {
         this.movie = resp.movie;
@@ -87,6 +107,6 @@ export class MovieComponent implements OnInit {
         text: 'Something went wrong!'
       })
     }
-  }
+  } 
 
 }

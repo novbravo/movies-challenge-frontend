@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RatingModule } from 'ng-starrating';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { HomeComponent } from './home/home.component';
 import { MovieComponent } from './movie/movie.component';
 import { RatingComponent } from './rating/rating.component';
@@ -27,7 +29,8 @@ import { MoviesComponent } from './movies/movies.component';
     CommonModule,
     FormsModule,
     RatingModule,
-    RouterModule
+    RouterModule,
+    NgbModule
   ]
 })
 export class PagesModule { }
